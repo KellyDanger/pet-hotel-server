@@ -13,8 +13,6 @@ CREATE TABLE "Pets" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "Owner" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
@@ -23,7 +21,10 @@ CREATE TABLE "Owner" (
   OIDS=FALSE
 );
 
-
-
 ALTER TABLE "Pets" ADD CONSTRAINT "Pets_fk0" FOREIGN KEY ("owner_id") REFERENCES "Owner"("id");
 
+INSERT INTO "Pets" ("name", "breed", "color", "checked_in", "checked_in_date", "owner_id")
+VALUES ('Joe', 'Z-Pet', 'Black', 'TRUE', '12/4/2020', 1);
+
+INSERT INTO "Owner" ("name")
+VALUES ('Franz');

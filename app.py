@@ -2,13 +2,13 @@ from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-#DB Connection
-import psycopg
-
 app = Flask(__name__)
 CORS(app)
 
-con = psycopg.connect(
+#DB Connection
+import psycopg2
+
+con = psycopg2.connect(
   host = "localhost",
   database="pet-hotel"
 )
@@ -17,7 +17,7 @@ con = psycopg.connect(
 cur = con.cursor()
 
 # Execute a query 
-cur.execute("SELECT * FROM pets")
+cur.execute('SELECT * FROM "Pets";')
 
 #Retrieve query results
 records = cur.fetchall()
@@ -27,6 +27,7 @@ records = cur.fetchall()
 # define the function for this route
 def index():
   # return render_template('index.html')
+  print(records)
   return 'Hello World from Pod-3'
 
 if __name__ == "__main__":
