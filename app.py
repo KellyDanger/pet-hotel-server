@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, json
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
@@ -23,12 +23,15 @@ cur.execute('SELECT * FROM "Pets";')
 records = cur.fetchall()
 
 # creates route @ used for Flask
-@app.route('/')
-# define the function for this route
-def index():
-  # return render_template('index.html')
-  print(records)
-  return 'Hello World from Pod-3'
+@app.route('/pets', methods=['GET'])
+def get_pets():
+    return {'result': records}
+
+# creates route to send data 
+@app.route('/pets', methods=['POST'])
+def send_pets():
+  return json.dumps({"success": True}), 201
 
 if __name__ == "__main__":
   app.run(debug=True)
+#       
